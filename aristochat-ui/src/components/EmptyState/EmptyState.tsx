@@ -1,8 +1,12 @@
 import React from 'react';
-import catIcon from '../assets/cat.png';
+import catIcon from '../../assets/cat.png';
 import styles from './EmptyState.module.css';
 
-export default function EmptyState({ hasAgents }) {
+interface EmptyStateProps {
+  hasAgents: boolean;
+}
+
+export default function EmptyState({ hasAgents }: EmptyStateProps) {
   return (
     <div className={styles.container}>
       <img src={catIcon} alt="" className={styles.icon} />

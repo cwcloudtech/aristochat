@@ -8,12 +8,10 @@
 }
 
 .typing {
+  composes: contentRow from '../../styles/common.module.css';
   display: flex;
   align-items: center;
   gap: 4px;
-  max-width: 780px;
-  width: 100%;
-  margin: 0 auto;
   padding: 4px 16px 4px 54px;
 }
 

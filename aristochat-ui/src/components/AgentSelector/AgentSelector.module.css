@@ -5,19 +5,9 @@
 }
 
 .input {
+  composes: textField from '../../styles/common.module.css';
   width: 100%;
   padding: 9px 32px 9px 14px;
-  border-radius: 10px;
-  border: 1px solid var(--color-border);
-  background: var(--color-bg-elevated);
-  color: var(--color-text);
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.15s ease;
-}
-
-.input:focus {
-  border-color: var(--color-primary);
 }
 
 .chevron {

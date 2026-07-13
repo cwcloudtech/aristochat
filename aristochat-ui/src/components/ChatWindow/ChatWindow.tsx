@@ -1,24 +1,34 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { sendMessage } from '../services/chatApi';
-import ChatInput from './ChatInput';
-import EmptyState from './EmptyState';
-import MessageList from './MessageList';
-import SettingsPanel from './SettingsPanel';
+import { sendMessage } from '../../services/chatApi';
+import { Agent } from '../../types/agent';
+import { ChatMessage, ChatSettings } from '../../types/chat';
+import ChatInput from '../ChatInput/ChatInput';
+import EmptyState from '../EmptyState/EmptyState';
+import MessageList from '../MessageList/MessageList';
+import SettingsPanel from '../SettingsPanel/SettingsPanel';
 import styles from './ChatWindow.module.css';
+
+interface ChatWindowProps {
+  agent: Agent | null;
+  hasAgents: boolean;
+}
 
 let messageId = 0;
 const nextId = () => `msg-${Date.now()}-${messageId++}`;
 
-const DEFAULT_SETTINGS = { adapter: 'default', maxTokens: 500, enableHistory: true };
+const DEFAULT_SETTINGS: ChatSettings = { adapter: 'default', maxTokens: 500, enableHistory: true };
 
-export default function ChatWindow({ agent, hasAgents }) {
-  const [messages, setMessages] = useState([]);
+export default function ChatWindow({ agent, hasAgents }: ChatWindowProps) {
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [settings, setSettings] = useState(DEFAULT_SETTINGS);
+  const [settings, setSettings] = useState<ChatSettings>(DEFAULT_SETTINGS);
   const [showSettings, setShowSettings] = useState(false);
 
-  async function callAgent(text, { regenerate = false } = {}) {
+  async function callAgent(text: string, { regenerate = false } = {}) {
+    if (!agent) {
+      return;
+    }
     setIsLoading(true);
     try {
       const data = await sendMessage(agent, {
@@ -33,13 +43,13 @@ export default function ChatWindow({ agent, hasAgents }) {
         { id: nextId(), role: 'assistant', content: data.message, usage: data.usage },
       ]);
     } catch (error) {
-      toast.error(error.message);
+      toast.error((error as Error).message);
     } finally {
       setIsLoading(false);
     }
   }
 
-  function handleSend(text) {
+  function handleSend(text: string) {
     setMessages((current) => [...current, { id: nextId(), role: 'user', content: text }]);
     callAgent(text);
   }

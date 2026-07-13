@@ -1,9 +1,14 @@
 import React, { useRef, useState } from 'react';
 import styles from './ChatInput.module.css';
 
-export default function ChatInput({ disabled, onSend }) {
+interface ChatInputProps {
+  disabled: boolean;
+  onSend: (message: string) => void;
+}
+
+export default function ChatInput({ disabled, onSend }: ChatInputProps) {
   const [value, setValue] = useState('');
-  const textareaRef = useRef(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   function submit() {
     const trimmed = value.trim();
@@ -17,14 +22,14 @@ export default function ChatInput({ disabled, onSend }) {
     }
   }
 
-  function handleKeyDown(event) {
+  function handleKeyDown(event: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
       submit();
     }
   }
 
-  function handleChange(event) {
+  function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setValue(event.target.value);
     const textarea = textareaRef.current;
     if (textarea) {

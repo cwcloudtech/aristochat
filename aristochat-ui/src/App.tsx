@@ -1,16 +1,17 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ChatWindow from './components/ChatWindow';
-import Navbar from './components/Navbar';
+import ChatWindow from './components/ChatWindow/ChatWindow';
+import Navbar from './components/Navbar/Navbar';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { Agent } from './types/agent';
 import { loadAgents } from './utils/agents';
 import styles from './App.module.css';
 
 function AppContent() {
   const { theme } = useTheme();
   const agents = useMemo(() => loadAgents(), []);
-  const [selectedAgent, setSelectedAgent] = useState(null);
+  const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null);
 
   useEffect(() => {
     if (agents === null) {

@@ -1,10 +1,17 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import catIcon from '../assets/cat.png';
+import catIcon from '../../assets/cat.png';
+import { ChatUsage, MessageRole } from '../../types/chat';
 import styles from './Message.module.css';
 
-export default function Message({ role, content, usage }) {
+interface MessageProps {
+  role: MessageRole;
+  content: string;
+  usage?: ChatUsage;
+}
+
+export default function Message({ role, content, usage }: MessageProps) {
   const isUser = role === 'user';
 
   return (

@@ -1,9 +1,15 @@
 import React, { useEffect, useRef } from 'react';
-import Message from './Message';
+import { ChatMessage } from '../../types/chat';
+import Message from '../Message/Message';
 import styles from './MessageList.module.css';
 
-export default function MessageList({ messages, isLoading }) {
-  const bottomRef = useRef(null);
+interface MessageListProps {
+  messages: ChatMessage[];
+  isLoading: boolean;
+}
+
+export default function MessageList({ messages, isLoading }: MessageListProps) {
+  const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });

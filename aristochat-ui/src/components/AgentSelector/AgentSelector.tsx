@@ -1,19 +1,26 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Agent } from '../../types/agent';
 import styles from './AgentSelector.module.css';
 
-export default function AgentSelector({ agents, selectedAgent, onSelect }) {
+interface AgentSelectorProps {
+  agents: Agent[];
+  selectedAgent: Agent | null;
+  onSelect: (agent: Agent) => void;
+}
+
+export default function AgentSelector({ agents, selectedAgent, onSelect }: AgentSelectorProps) {
   const [query, setQuery] = useState(selectedAgent?.name ?? '');
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setQuery(selectedAgent?.name ?? '');
   }, [selectedAgent]);
 
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (containerRef.current && !containerRef.current.contains(event.target)) {
+    function handleClickOutside(event: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setIsOpen(false);
         setQuery(selectedAgent?.name ?? '');
       }
@@ -30,13 +37,13 @@ export default function AgentSelector({ agents, selectedAgent, onSelect }) {
     return agents.filter((agent) => agent.name.toLowerCase().includes(normalized));
   }, [agents, query, selectedAgent]);
 
-  function selectAgent(agent) {
+  function selectAgent(agent: Agent) {
     onSelect(agent);
     setQuery(agent.name);
     setIsOpen(false);
   }
 
-  function handleKeyDown(event) {
+  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (!isOpen && (event.key === 'ArrowDown' || event.key === 'Enter')) {
       setIsOpen(true);
       return;

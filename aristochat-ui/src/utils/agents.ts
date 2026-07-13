@@ -1,17 +1,23 @@
-function isValidAgent(agent) {
-  return Boolean(agent) && typeof agent.name === 'string' && typeof agent.url === 'string';
+import { Agent } from '../types/agent';
+
+function isValidAgent(agent: unknown): agent is Agent {
+  return (
+    Boolean(agent) &&
+    typeof (agent as Agent).name === 'string' &&
+    typeof (agent as Agent).url === 'string'
+  );
 }
 
 // Returns the parsed agent list, an empty array when none are configured,
 // or null when REACT_APP_AGENTS_ENDPOINTS holds unparsable/invalid content.
-export function loadAgents() {
+export function loadAgents(): Agent[] | null {
   const raw = process.env.REACT_APP_AGENTS_ENDPOINTS;
 
   if (!raw) {
     return [];
   }
 
-  let parsed;
+  let parsed: unknown;
   try {
     parsed = JSON.parse(raw);
   } catch (error) {

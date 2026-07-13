@@ -1,5 +1,8 @@
-function buildHeaders(agent) {
-  const headers = { 'Content-Type': 'application/json' };
+import { Agent } from '../types/agent';
+import { ChatResponsePayload } from '../types/chat';
+
+function buildHeaders(agent: Agent): Record<string, string> {
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
 
   if (agent.headers) {
     Object.assign(headers, agent.headers);
@@ -11,10 +14,21 @@ function buildHeaders(agent) {
   return headers;
 }
 
-export async function sendMessage(agent, { message, adapter, maxTokens, regenerate, enableHistory }) {
+interface SendMessageOptions {
+  message: string;
+  adapter: string;
+  maxTokens: number;
+  regenerate: boolean;
+  enableHistory: boolean;
+}
+
+export async function sendMessage(
+  agent: Agent,
+  { message, adapter, maxTokens, regenerate, enableHistory }: SendMessageOptions
+): Promise<ChatResponsePayload> {
   const endpoint = new URL('/', agent.url).toString();
 
-  let response;
+  let response: Response;
   try {
     response = await fetch(endpoint, {
       method: 'POST',
@@ -28,10 +42,10 @@ export async function sendMessage(agent, { message, adapter, maxTokens, regenera
       }),
     });
   } catch (error) {
-    throw new Error(`Unable to reach "${agent.name}": ${error.message}`);
+    throw new Error(`Unable to reach "${agent.name}": ${(error as Error).message}`);
   }
 
-  let data = null;
+  let data: ChatResponsePayload | null = null;
   try {
     data = await response.json();
   } catch {
