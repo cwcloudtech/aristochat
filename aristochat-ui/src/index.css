@@ -17,7 +17,7 @@
   --shadow-elevated: 0 2px 10px rgba(16, 35, 59, 0.08);
   /* Fixed (not theme-flipped): the logo/cat artwork is dark navy on transparent,
      so it needs a background that stays light even in dark mode to stay visible. */
-  --color-avatar-bg: #e4edf8;
+  --color-avatar-bg: #6A89A7;
   color-scheme: light;
 }
 
