@@ -28,15 +28,22 @@ export function loadAgents(): Agent[] | null {
   try {
     parsed = JSON.parse(raw);
   } catch (error) {
-    // Fallback: sometimes the value is wrapped in single quotes (shell-style)
+    // Fallback 1: sometimes the value is wrapped in single quotes (shell-style)
     // or otherwise quoted. Try stripping surrounding single/double quotes
     // and parse again.
     const stripped = raw.replace(/^['"]|['"]$/g, '');
     try {
       parsed = JSON.parse(stripped);
     } catch (err2) {
-      console.error('Unable to parse AGENTS_ENDPOINTS as JSON.', error, err2);
-      return [];
+      // Fallback 2: the value itself uses single quotes for keys/strings
+      // (e.g. "[{'name':'x','url':'y'}]"), which isn't valid JSON. Convert
+      // single quotes to double quotes and parse again.
+      try {
+        parsed = JSON.parse(stripped.replace(/'/g, '"'));
+      } catch (err3) {
+        console.error('Unable to parse AGENTS_ENDPOINTS as JSON.', error, err2, err3);
+        return [];
+      }
     }
   }
 

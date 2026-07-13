@@ -14,7 +14,7 @@ export default function EmptyState({ hasAgents }: EmptyStateProps) {
       <p className={styles.subtitle}>
         {hasAgents
           ? 'Choose one of your CWCloud agents from the dropdown above.'
-          : 'Set REACT_APP_AGENTS_ENDPOINTS to list the agents available to this chat.'}
+          : 'Set AGENTS_ENDPOINTS to list the agents available to this chat.'}
       </p>
     </div>
   );
