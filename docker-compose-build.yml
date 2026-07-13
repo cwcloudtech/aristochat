@@ -1,0 +1,7 @@
+services:
+  ui:
+    image: ${CI_REGISTRY}/aristochat-ui:${VERSION}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: ui

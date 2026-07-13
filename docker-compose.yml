@@ -1,0 +1,10 @@
+services:
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: ui
+    env_file:
+      - .env.example
+    ports:
+      - "3000:80"

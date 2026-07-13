@@ -4,7 +4,7 @@
 
 Write a react chat which is a static web interface in React, similar to chatGPT for CWCloud's agents like [`cwc`](https://www.cwcloud.tech/docs/tutorials/cli/public/#create-a-web-agent), [`qwctl`](https://www.cwcloud.tech/docs/tutorials/observability/qwctl/#create-a-web-agent) or [`edtctl`](https://www.cwcloud.tech/docs/tutorials/observability/edtctl/#create-a-web-agent).
 
-I want an environment variable `AGENTS_ENDPOINTS` which is a json of agents like this:
+I want an environment variable `REACT_APP_AGENTS_ENDPOINTS` (inside a `.env.react` file which will be taking into account in the build)which is a json of agents like this:
 
 ```json
 [
@@ -33,6 +33,12 @@ I want an environment variable `AGENTS_ENDPOINTS` which is a json of agents like
 As you can see you can authenticate with either `headers` or `credentials` or nothing.
 
 In the chat I want a select autocomplete dropdown with all the agents.
+
+The default .env.react should contains this:
+
+```
+REACT_APP_AGENTS_ENDPOINTS="${AGENTS_ENDPOINTS}"
+```
 
 Here's the interface contract `POST /` (with `Content-Type: application/json`):
 
@@ -64,10 +70,19 @@ And the response will be like:
 
 ## UX/UI
 
-I want light mode and dark mode with icon in the navbar to switch between them.
+I want light mode and dark mode with icon in the navbar to switch between them. The main theme color is sea blue and I want you to use the logo, the cat icon, and the favico available in the [assets](./assets) folder.
 
 The `message` will answere markdown, so I want to render it properly.
 
 ## Error handling
 
 I want toasts for the errors.
+
+## Build
+
+Take into account that it will be build and run using docker with the following files:
+
+* [Dockerfile](../Dockerfile)
+* [docker-compose.yml](../docker-compose.yml) on localhost
+* [docker-compose-build.yaml](../docker-compose-build.yaml) on CICD pipeline
+* [.docker](../.docker) containing entrypoint that will do the environement replacement on startup.
