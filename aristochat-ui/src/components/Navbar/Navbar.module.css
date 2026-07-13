@@ -10,8 +10,11 @@
 }
 
 .logo {
-  height: 32px;
+  composes: lightBadge from '../../styles/common.module.css';
+  border-radius: 10px;
+  height: 44px;
   width: auto;
+  padding: 8px 20px;
   display: block;
 }
 

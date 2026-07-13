@@ -11,9 +11,11 @@
 }
 
 .icon {
-  width: 96px;
-  height: 96px;
+  composes: avatarBadge from '../../styles/common.module.css';
+  width: 112px;
+  height: 112px;
   object-fit: contain;
+  padding: 12px;
   opacity: 0.9;
   margin-bottom: 8px;
 }

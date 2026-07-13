@@ -11,11 +11,10 @@
 }
 
 .avatar {
+  composes: avatarBadge from '../../styles/common.module.css';
   width: 30px;
   height: 30px;
-  border-radius: 50%;
   object-fit: contain;
-  background: var(--color-bg-inset);
   padding: 3px;
   flex-shrink: 0;
 }

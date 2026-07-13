@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import remarkBreaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
 import catIcon from '../../assets/cat.png';
 import { ChatUsage, MessageRole } from '../../types/chat';
@@ -23,7 +24,7 @@ export default function Message({ role, content, usage }: MessageProps) {
             <p className={styles.plainText}>{content}</p>
           ) : (
             <div className={styles.markdown}>
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+              <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>{content}</ReactMarkdown>
             </div>
           )}
         </div>
