@@ -1,0 +1,83 @@
+:root {
+  --color-bg: #f2f6fb;
+  --color-bg-elevated: #ffffff;
+  --color-bg-inset: #e8eff7;
+  --color-text: #10233b;
+  --color-text-secondary: #536780;
+  --color-border: #d7e2ee;
+  --color-primary: #1a6fb0;
+  --color-primary-hover: #135a8f;
+  --color-primary-contrast: #ffffff;
+  --color-bubble-user: #1a6fb0;
+  --color-bubble-user-text: #ffffff;
+  --color-bubble-assistant: #ffffff;
+  --color-bubble-assistant-text: #10233b;
+  --color-danger: #d64545;
+  --color-scrollbar: #c2d3e3;
+  --shadow-elevated: 0 2px 10px rgba(16, 35, 59, 0.08);
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --color-bg: #0d1721;
+  --color-bg-elevated: #16232f;
+  --color-bg-inset: #101c28;
+  --color-text: #e7eef7;
+  --color-text-secondary: #92a4b8;
+  --color-border: #24384a;
+  --color-primary: #4fa3e3;
+  --color-primary-hover: #6db4ea;
+  --color-primary-contrast: #05141f;
+  --color-bubble-user: #1a6fb0;
+  --color-bubble-user-text: #ffffff;
+  --color-bubble-assistant: #16232f;
+  --color-bubble-assistant-text: #e7eef7;
+  --color-danger: #ef6b6b;
+  --color-scrollbar: #24384a;
+  --shadow-elevated: 0 2px 10px rgba(0, 0, 0, 0.35);
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji';
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
+}
+
+button {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-scrollbar);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}

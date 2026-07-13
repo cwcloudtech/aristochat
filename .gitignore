@@ -3,3 +3,6 @@ edtctl-helm
 *.tgz
 .DS_Store
 alert.local.yaml
+node_modules
+build
+.env
