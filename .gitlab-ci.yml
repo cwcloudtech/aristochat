@@ -1,0 +1,33 @@
+stages:
+  - publish
+  - build
+  - deploy
+
+mirror:
+  stage: publish
+  script:
+    - setsid ./ci/mirror.sh
+  only:
+    - /^main$/
+  tags:
+    - mirror
+
+build:
+  stage: build
+  tags:
+    - imagesbuilder
+  only:
+    - /^main$/
+  script:
+    - ./ci/prune.sh
+    - ./ci/deliver.sh
+
+scan:
+  stage: deploy
+  tags:
+    - imagesbuilder
+  only:
+    - /^main$/
+  script:
+    - ././ci/prune.sh
+    - ./ci/scan.sh
