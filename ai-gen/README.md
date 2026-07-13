@@ -3,3 +3,4 @@
 * [ai-instruct-1](./ai-instruct-1.md)
 * [ai-instruct-2](./ai-instruct-2.md)
 * [ai-instruct-3](./ai-instruct-3.md)
+* [ai-instruct-4](./ai-instruct-4.md)

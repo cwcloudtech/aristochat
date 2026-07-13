@@ -22,12 +22,6 @@ export interface ChatResponsePayload {
   usage?: ChatUsage;
 }
 
-export interface ChatSettings {
-  adapter: string;
-  maxTokens: number;
-  enableHistory: boolean;
-}
-
 export interface ChatMessage {
   id: string;
   role: MessageRole;

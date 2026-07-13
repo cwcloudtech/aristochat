@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { sendMessage } from '../../services/chatApi';
 import { Agent } from '../../types/agent';
-import { ChatMessage, ChatSettings } from '../../types/chat';
+import { ChatMessage } from '../../types/chat';
 import ChatInput from '../ChatInput/ChatInput';
 import EmptyState from '../EmptyState/EmptyState';
 import MessageList from '../MessageList/MessageList';
-import SettingsPanel from '../SettingsPanel/SettingsPanel';
 import styles from './ChatWindow.module.css';
 
 interface ChatWindowProps {
@@ -17,13 +16,12 @@ interface ChatWindowProps {
 let messageId = 0;
 const nextId = () => `msg-${Date.now()}-${messageId++}`;
 
-const DEFAULT_SETTINGS: ChatSettings = { adapter: 'default', maxTokens: 500, enableHistory: true };
+const MAX_TOKENS = 500;
+const ENABLE_HISTORY = true;
 
 export default function ChatWindow({ agent, hasAgents }: ChatWindowProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [settings, setSettings] = useState<ChatSettings>(DEFAULT_SETTINGS);
-  const [showSettings, setShowSettings] = useState(false);
 
   async function callAgent(text: string, { regenerate = false } = {}) {
     if (!agent) {
@@ -33,10 +31,10 @@ export default function ChatWindow({ agent, hasAgents }: ChatWindowProps) {
     try {
       const data = await sendMessage(agent, {
         message: text,
-        adapter: settings.adapter,
-        maxTokens: settings.maxTokens,
+        adapter: agent.name,
+        maxTokens: MAX_TOKENS,
         regenerate,
-        enableHistory: settings.enableHistory,
+        enableHistory: ENABLE_HISTORY,
       });
       setMessages((current) => [
         ...current,
@@ -88,23 +86,36 @@ export default function ChatWindow({ agent, hasAgents }: ChatWindowProps) {
       <div className={styles.header}>
         <span className={styles.agentName}>{agent.name}</span>
         <div className={styles.headerActions}>
-          <button type="button" className={styles.headerButton} onClick={handleRegenerate} disabled={!canRegenerate}>
-            Regenerate
-          </button>
-          <button type="button" className={styles.headerButton} onClick={handleNewChat} disabled={messages.length === 0}>
-            New chat
+          <button
+            type="button"
+            className={styles.headerIconButton}
+            onClick={handleRegenerate}
+            disabled={!canRegenerate}
+            aria-label="Regenerate response"
+            title="Regenerate response"
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3 12a9 9 0 0 1 15.5-6.3L21 8M21 3v5h-5M21 12a9 9 0 0 1-15.5 6.3L3 16m0 5v-5h5"
+              />
+            </svg>
           </button>
           <button
             type="button"
-            className={styles.headerButton}
-            onClick={() => setShowSettings((value) => !value)}
-            aria-expanded={showSettings}
+            className={styles.headerIconButton}
+            onClick={handleNewChat}
+            disabled={messages.length === 0}
+            aria-label="New chat"
+            title="New chat"
           >
-            Settings
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14M5 12h14" />
+            </svg>
           </button>
         </div>
       </div>
-      {showSettings && <SettingsPanel settings={settings} onChange={setSettings} />}
       {messages.length === 0 ? (
         <EmptyState hasAgents={hasAgents} />
       ) : (

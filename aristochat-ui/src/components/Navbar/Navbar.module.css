@@ -10,12 +10,21 @@
 }
 
 .logo {
-  composes: lightBadge from '../../styles/common.module.css';
-  border-radius: 10px;
-  height: 44px;
+  height: 45px;
   width: auto;
-  padding: 8px 20px;
   display: block;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  padding: 0;
+}
+
+/* The logo artwork is dark navy on transparent, so it only needs a
+   lighter badge behind it in dark mode to stay visible; in light mode
+   the navbar itself is already light enough. */
+:global(:root[data-theme='dark']) .logo {
+  background: var(--color-avatar-bg);
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-elevated);
 }
 
 .actions {
