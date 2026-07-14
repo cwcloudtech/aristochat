@@ -4,3 +4,4 @@
 * [ai-instruct-2](./ai-instruct-2.md)
 * [ai-instruct-3](./ai-instruct-3.md)
 * [ai-instruct-4](./ai-instruct-4.md)
+* [ai-instruct-5](./ai-instruct-5.md)

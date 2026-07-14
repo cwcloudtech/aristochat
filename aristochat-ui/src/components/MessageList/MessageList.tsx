@@ -9,14 +9,27 @@ interface MessageListProps {
 }
 
 export default function MessageList({ messages, isLoading }: MessageListProps) {
+  const listRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [messages, isLoading]);
 
+  useEffect(() => {
+    const list = listRef.current;
+    if (!list || typeof ResizeObserver === 'undefined') {
+      return undefined;
+    }
+    const observer = new ResizeObserver(() => {
+      bottomRef.current?.scrollIntoView({ behavior: 'auto', block: 'end' });
+    });
+    observer.observe(list);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className={styles.list}>
+    <div className={styles.list} ref={listRef}>
       {messages.map((message) => (
         <Message key={message.id} role={message.role} content={message.content} usage={message.usage} />
       ))}
