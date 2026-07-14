@@ -16,7 +16,6 @@
   border-radius: 20px;
   border: 1px solid transparent;
   padding: 0;
-  padding: 10px;
 }
 
 /* The logo artwork is dark navy on transparent, so it only needs a
@@ -25,7 +24,7 @@
 :global(:root[data-theme='dark']) .logo {
   background: var(--color-avatar-bg);
   border-color: var(--color-border);
-  box-shadow: var(--shadow-elevated);
+  box-shadow: var(--avatar-shadow, var(--shadow-elevated));
 }
 
 .actions {

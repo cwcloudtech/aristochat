@@ -25,7 +25,7 @@
 .lightBadge {
   background: var(--color-avatar-bg);
   border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-elevated);
+  box-shadow: var(--avatar-shadow, var(--shadow-elevated));
 }
 
 .avatarBadge {

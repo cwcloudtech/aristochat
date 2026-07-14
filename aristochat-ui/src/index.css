@@ -15,9 +15,10 @@
   --color-danger: #d64545;
   --color-scrollbar: #c2d3e3;
   --shadow-elevated: 0 2px 10px rgba(16, 35, 59, 0.08);
-  /* Fixed (not theme-flipped): the logo/cat artwork is dark navy on transparent,
-     so it needs a background that stays light even in dark mode to stay visible. */
-  --color-avatar-bg: #6A89A7;
+    /* Avatar/logo background: prefer fully transparent, but provide a subtle
+      theme-aware shadow to keep dark artwork visible on both light/dark pages. */
+    --color-avatar-bg: transparent;
+    --avatar-shadow: 0 2px 8px rgba(16, 35, 59, 0.06);
   color-scheme: light;
 }
 
@@ -38,6 +39,7 @@
   --color-danger: #ef6b6b;
   --color-scrollbar: #24384a;
   --shadow-elevated: 0 2px 10px rgba(0, 0, 0, 0.35);
+  --avatar-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
   color-scheme: dark;
 }
 
