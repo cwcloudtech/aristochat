@@ -21,9 +21,9 @@ The answer of the agent contains:
   "status": "ok",
   "message": "Hello! How can I assist you today with cloud automation or deployment using CWCloud?",
   "usage": {
-    "prompt_tokens": 8,
-    "completion_tokens": 10,
-    "total_tokens": 18
+    "prompt": 8,
+    "completion": 10,
+    "total": 18
   }
 }
 ```

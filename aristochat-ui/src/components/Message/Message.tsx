@@ -51,7 +51,7 @@ export default function Message({ role, content, usage }: MessageProps) {
         </div>
         {usage && !isTyping && (
           <span className={styles.usage}>
-            Usage: {usage.total_tokens} tokens (prompt: {usage.prompt_tokens}, completion: {usage.completion_tokens})
+            Usage: {usage.total} tokens (prompt: {usage.prompt}, completion: {usage.completion})
           </span>
         )}
       </div>

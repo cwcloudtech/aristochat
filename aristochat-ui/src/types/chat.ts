@@ -1,9 +1,9 @@
 export type MessageRole = 'user' | 'assistant';
 
 export interface ChatUsage {
-  prompt_tokens: number;
-  completion_tokens: number;
-  total_tokens: number;
+  prompt: number;
+  completion: number;
+  total: number;
 }
 
 export interface ChatRequestPayload {
