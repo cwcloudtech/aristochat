@@ -45,3 +45,5 @@ docker compose up --build --force-recreate
 ```
 
 Note: __any double quote in the `AGENTS_ENDPOINTS` JSON must be backslash-escaped__ (`\"`) or the substitution will produce invalid JavaScript. See the example in [.env.example](./.env.example).
+
+A public image is available here `rg.fr-par.scw.cloud/aristochat-g3kljh/aristochat-ui:latest`.
