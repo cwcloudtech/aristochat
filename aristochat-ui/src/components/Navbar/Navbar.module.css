@@ -9,6 +9,12 @@
   flex-shrink: 0;
 }
 
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .logo {
   height: 45px;
   width: auto;
@@ -16,6 +22,13 @@
   border-radius: 20px;
   border: 1px solid transparent;
   padding: 0;
+}
+
+.version {
+  font-style: italic;
+  font-weight: bold;
+  color: var(--color-danger);
+  white-space: nowrap;
 }
 
 /* The logo artwork is dark navy on transparent, so it only needs a

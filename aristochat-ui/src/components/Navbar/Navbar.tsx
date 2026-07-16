@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../../assets/logo.png';
+import { useManifest } from '../../hooks/useManifest';
 import { Agent } from '../../types/agent';
 import AgentSelector from '../AgentSelector/AgentSelector';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
@@ -13,10 +14,18 @@ interface NavbarProps {
 
 export default function Navbar({ agents, selectedAgent, onSelectAgent }: NavbarProps) {
   const docUrl = process.env.REACT_APP_DOCURL;
+  const manifest = useManifest();
 
   return (
     <header className={styles.navbar}>
-      <img src={logo} alt="Aristochat" className={styles.logo} />
+      <div className={styles.brand}>
+        <img src={logo} alt="Aristochat" className={styles.logo} />
+        {manifest && (
+          <span className={styles.version} title={`${manifest.sha} — ${manifest.details}`}>
+            v{manifest.version}
+          </span>
+        )}
+      </div>
       <div className={styles.actions}>
         <AgentSelector agents={agents} selectedAgent={selectedAgent} onSelect={onSelectAgent} />
         <ThemeToggle />
