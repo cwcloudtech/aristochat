@@ -58,6 +58,7 @@
 
 .usage {
   font-size: 11px;
+  font-style: italic;
   color: var(--color-text-secondary);
   padding: 0 4px;
 }
