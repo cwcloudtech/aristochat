@@ -38,7 +38,7 @@ npm start
 
 `headers`, `credentials` (turned into HTTP Basic auth), or neither may be provided per agent.
 
-## Using docker
+### Using docker
 
 ```sh
 docker compose up --build --force-recreate
