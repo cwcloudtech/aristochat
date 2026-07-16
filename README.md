@@ -2,6 +2,14 @@
 
 This chat is a web interfacte similar to chatGPT for CWCloud's agents like [`cwc`](https://www.cwcloud.tech/docs/tutorials/cli/public/#create-a-web-agent), [`qwctl`](https://www.cwcloud.tech/docs/tutorials/observability/qwctl/#create-a-web-agent) or [`edtctl`](https://www.cwcloud.tech/docs/tutorials/observability/edtctl/#create-a-web-agent).
 
+![aristochat-1](./img/aristochat-1.png)
+
+![aristochat-2](./img/aristochat-2.png)
+
+## Complete documentation
+
+You can find the complete documentation [here](https://www.cwcloud.tech/docs/tutorials/aristochat).
+
 ## Getting started
 
 ### Using npm
